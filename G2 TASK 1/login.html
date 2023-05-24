@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <!-- SweetAlert CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.6/dist/sweetalert2.min.css">
+
+  <style>
+    body {
+      background-color: #f2f2f2;
+    }
+
+    .glass-effect {
+      background-color: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+    }
+
+    .login-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .btn-secondary {
+      background-color: #000000a1;
+      color: white;
+    }
+
+    .btn-google {
+      background-color: #db4a39;
+      color: white;
+    }
+
+    .btn-facebook {
+      background-color: #3b5998;
+      color: white;
+    }
+
+    .btn-twitter {
+      background-color: #1da1f2;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="glass-effect p-5 rounded">
+          <h2 class="text-center mb-4">Login</h2>
+          <div class="text-center mb-4">
+            <img src="./assets/Typing.gif" alt="Image" class="img-fluid login-image rounded" id="loginImage">
+          </div>
+          <form onsubmit="return validateForm()">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-user"></i></span>
+                </div>
+                <input type="text" class="form-control" id="username" placeholder="Enter your username ..."
+                  onclick="changeImageUsername()" onmouseout="restoreDefaultImage()">
+              </div>
+              <small id="usernameError" class="text-danger"></small>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                </div>
+                <input type="password" class="form-control" id="password" placeholder="Enter your password ..."
+                  onclick="changeImagePassword()" onmouseout="restoreDefaultImage()">
+              </div>
+              <small id="passwordError" class="text-danger"></small>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+              </div>
+              <div class="col-md-6">
+                <button type="button" class="btn btn-link btn-block" onclick="forgotPassword()">Forgot
+                  Password?</button>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <button type="button" class="btn btn-google btn-block" onclick="loginWithGoogle()">
+                  <i class="fab fa-google"></i>
+                  <span class="d-none d-xl-inline">Google</span>
+                </button>
+              </div>
+              <div class="col-md-4 mb-3">
+                <button type="button" class="btn btn-facebook btn-block" onclick="loginWithFacebook()">
+                  <i class="fab fa-facebook-f"></i>
+                  <span class="d-none d-xl-inline">Facebook</span>
+                </button>
+              </div>
+              <div class="col-md-4">
+                <button type="button" class="btn btn-twitter btn-block" onclick="loginWithTwitter()">
+                  <i class="fab fa-twitter"></i>
+                  <span class="d-none d-xl-inline">Twitter</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- SweetAlert JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.6/dist/sweetalert2.all.min.js"></script>
+  <script>
+    // Function to change the login image when username field is clicked
+    function changeImageUsername() {
+      var loginImage = document.getElementById("loginImage");
+      loginImage.src = "./assets/Id Card.gif";
+    }
+
+    // Function to change the login image when password field is clicked
+    function changeImagePassword() {
+      var loginImage = document.getElementById("loginImage");
+      loginImage.src = "./assets/password.gif";
+    }
+
+    // Function to restore the default login image when mouse is moved away from the input fields
+    function restoreDefaultImage() {
+      var loginImage = document.getElementById("loginImage");
+      loginImage.src = "./assets/Typing.gif";
+    }
+
+    // Function to validate the form before submission
+    function validateForm() {
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+
+      if (username.trim() === "") {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Username cannot be empty",
+        });
+        return false;
+      }
+
+      if (password === "") {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Password cannot be empty",
+        });
+        return false;
+      }
+
+      if (username === "admin" && password === "admin@123") {
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Login successful!",
+        }).then(function () {
+          // Show full-screen image
+          document.body.innerHTML = `
+            <div style="background-color: #000; height: 100vh; display: flex; justify-content: center; align-items: center;">
+              <img src="https://cdn.dribbble.com/users/1755667/screenshots/13043388/media/e68c1c65e5a8151f0b77180a302c8390.gif" alt="Full-screen Image" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          `;
+
+          // Navigate to another page after a delay (replace "another-page.html" with the desired URL)
+          setTimeout(function () {
+            window.location.href = "another-page.html";
+          }, 2800); // 3000 milliseconds = 3 seconds
+        });
+      } else if (username !== "admin") {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "No user found",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Invalid username or password",
+        });
+      }
+
+      return false; // Prevent form submission
+    }
+
+    // Function to handle the "Forgot Password?" functionality
+    function forgotPassword() {
+      Swal.fire({
+        icon: "info",
+        title: "<h5 class='mb-3'>FORGOT PASSWORD?</h5>",
+        html: `
+        <input type="text" id="usernameInput" class="swal2-input" placeholder="Enter your username">
+      `,
+        showCancelButton: true,
+        cancelButtonText: "CANCEL",
+        showConfirmButton: true,
+        confirmButtonText: "RESET PASSWORD",
+        preConfirm: () => {
+          const username = document.getElementById("usernameInput").value.trim();
+
+          if (username === "admin") {
+            return "admin";
+          } else {
+            Swal.showValidationMessage("No User Found!");
+            return false;
+          }
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const username = result.value;
+          if (username === "admin") {
+            Swal.fire({
+              icon: "success",
+              title: "Success",
+              text: "We Emailed You a Password Reset Link"
+            });
+          }
+        }
+      });
+    }
+
+    // Function to handle the "Login with Google" functionality
+    function loginWithGoogle() {
+      var windowWidth = 600;
+      var windowHeight = 400;
+      var left = (screen.width - windowWidth) / 2;
+      var top = (screen.height - windowHeight) / 2;
+      var miniWindow = window.open("https://accounts.google.com/v3/signin/identifier?dsh=S-1206968851%3A1684839927152119&ifkv=Af_xneEMNaRj2JD84uixcMiEXj5mqJqRmRVOPmusqmcT6UdHPjhyuihA5AaJPBuDCRv-1TjHYYcw&flowName=GlifWebSignIn&flowEntry=ServiceLogin", "_blank", "width=" + windowWidth + ",height=" + windowHeight + ",left=" + left + ",top=" + top);
+      miniWindow.focus();
+    }
+
+    // Function to handle the "Login with Facebook" functionality
+    function loginWithFacebook() {
+      var windowWidth = 600;
+      var windowHeight = 400;
+      var left = (screen.width - windowWidth) / 2;
+      var top = (screen.height - windowHeight) / 2;
+      var miniWindow = window.open("https://www.facebook.com/login", "_blank", "width=" + windowWidth + ",height=" + windowHeight + ",left=" + left + ",top=" + top);
+      miniWindow.focus();
+    }
+
+    // Function to handle the "Login with Twitter" functionality
+    function loginWithTwitter() {
+      var windowWidth = 600;
+      var windowHeight = 400;
+      var left = (screen.width - windowWidth) / 2;
+      var top = (screen.height - windowHeight) / 2;
+      var miniWindow = window.open("https://twitter.com/login", "_blank", "width=" + windowWidth + ",height=" + windowHeight + ",left=" + left + ",top=" + top);
+      miniWindow.focus();
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Page</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <style>
+    body {
+      background-color: #f2f2f2;
+      animation: fade-in 1s ease-in-out;
+    }
+
+    .glass-effect {
+      background-color: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+    }
+
+    .login-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    @keyframes fade-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="glass-effect p-5 rounded">
+          <h2 class="text-center mb-4">Welcome</h2>
+          <div class="text-center mb-4">
+            <img src="https://usagif.com/wp-content/uploads/gifs/handshake-33.gif" alt="Image" class="img-fluid login-image rounded">
+          </div>
+          <div class="text-center mb-4">
+            <h4>Welcome, <span id="username">Admin</span>!</h4>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <button type="button" class="btn btn-primary btn-block" onclick="logout()">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- SweetAlert JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.6/dist/sweetalert2.all.min.js"></script>
+  <script>
+    function logout() {
+      Swal.fire({
+        icon: "info",
+        title: "Logout",
+        text: "You have been logged out.",
+      }).then((result) => {
+        // Navigate to the login page (replace "login.html" with the desired URL)
+        window.location.href = "login.html";
+      });
+    }
+  </script>
+</body>
+
+</html>
